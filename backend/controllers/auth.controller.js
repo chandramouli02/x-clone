@@ -40,18 +40,21 @@ export const signUp = async (req, res) => {
 
     if (newUser) {
       generateTokenAndSetCookie(newUser._id, res);//In this res we set cookie.
-      await newUser.save(); //saves new use to db.
+      await newUser.save(); //saves new user to db.
 
-      res.status(201).json({
-        _id: newUser._id,
-        username: newUser.username,
-        email: newUser.email,
-        fullName: newUser.fullName,
-        followers: newUser.followers,
-        following: newUser.following,
-        coverImg: newUser.coverImg,
-        profileImg: newUser.profileImg,
-      });
+      newUser.password = null;
+      res.status(201).json(newUser
+      //   {
+      //   _id: newUser._id,
+      //   username: newUser.username,
+      //   email: newUser.email,
+      //   fullName: newUser.fullName,
+      //   followers: newUser.followers,
+      //   following: newUser.following,
+      //   coverImg: newUser.coverImg,
+      //   profileImg: newUser.profileImg,
+      // }
+    );
     } else {
       res.status(400).json({ error: "Invalid user data" });
     }
@@ -64,6 +67,10 @@ export const signUp = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
+    if (!username || !password){
+      return res.status(400).json({message: "Enter both username and password"})
+    }
+
     const user = await User.findOne({ username });
     const isPasswordValid = await bcrypt.compare(
       password,
@@ -75,17 +82,20 @@ export const login = async (req, res) => {
     }
 
     generateTokenAndSetCookie(user._id, res); // creates cookies and sends as response..
-
-    res.status(200).json({
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      fullName: user.fullName,
-      followers: user.followers,
-      following: user.following,
-      coverImg: user.coverImg,
-      profileImg: user.profileImg,
-    });
+    
+    user.password = null;
+    res.status(200).json(user
+    //   {
+    //   _id: user._id,
+    //   username: user.username,
+    //   email: user.email,
+    //   fullName: user.fullName,
+    //   followers: user.followers,
+    //   following: user.following,
+    //   coverImg: user.coverImg,
+    //   profileImg: user.profileImg,
+    // }
+  );
 
   } catch (error) {
     console.log("error in login controller:", error.message); //for debugging porpuse.
