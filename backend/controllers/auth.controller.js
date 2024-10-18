@@ -20,13 +20,17 @@ export const signUp = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: "Username is already taken" });
     }
-
+    
+    if(!fullName){
+      fullName = username;
+    }
+    
     if (password.length < 6) {
       return res
-        .status(400)
-        .json({ error: "Password length must be greater than 6" });
+      .status(400)
+      .json({ error: "Password length must be greater than 6" });
     }
-
+    
     //hash password using bcrypt.
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
