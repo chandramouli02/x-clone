@@ -199,11 +199,11 @@ export const getFollowingPosts = async(req,res)=> {
     const feedPosts = await Post.find({user: {$in: followingUsers}}).sort({createdAt: -1})
     .populate({
       path: "user",
-      select: '-password -email',
+      select: '-password',
     })
     .populate({
       path: "comments.user",
-      select: "-password email"
+      select: "-password"
     });
 
     res.status(200).json(feedPosts);
