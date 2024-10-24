@@ -23,7 +23,7 @@ function App() {
           throw new Error(data.error || "Something went wrong");
         }
 
-        console.log("auth user: ", data);
+        //console.log("auth user: ", data);
 
         return data;
       } catch (error) {
