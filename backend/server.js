@@ -19,7 +19,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-app.use(express.json()); //middleware to parse data. while req & res.
+app.use(express.json({limit: '5mb'})); //middleware to parse data. while req & res.
+//limit shouldn't be too high to prevent DOS attack..
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
