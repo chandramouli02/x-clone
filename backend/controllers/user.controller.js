@@ -160,7 +160,6 @@ export const updateUserProfile = async (req, res) => {
 
     user.fullName = fullName || user.fullName;
     user.email = email || user.email;
-    //user.password = newHashedPassword || user.password;
     user.username = username || user.username;
     user.bio = bio || user.bio;
     user.link = link || user.link;
@@ -174,7 +173,7 @@ export const updateUserProfile = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    console.log("Error in updateUserProfile controller");
+    console.log("Error in updateUserProfile controller", error.message);
     res.status(500).json({ message: error.message });
   }
 };
