@@ -41,7 +41,8 @@ const Sidebar = () => {
     logoutMutation();
   };
 
-  const {data: authUser} = useQuery({queryKey: ["authUser"]})
+  const {data: authUser} = useQuery({queryKey: ["authUser"]});
+  const {data: notifications} = useQuery({queryKey: ["notifications"]})//to get the notifications length
 
   return (
     <div className="md:flex-[2_2_0] w-18 max-w-52">
@@ -65,6 +66,11 @@ const Sidebar = () => {
               className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
             >
               <IoNotifications className="w-6 h-6" />
+              {notifications && 
+              <div className="flex items-center justify-center absolute z-10 ml-3 mb-2 bg-pink-600 rounded-full h-3 w-3 text-center">
+              <span style={{fontSize: '8px'}}>{notifications.length}</span>
+              </div>
+              }
               <span className="text-lg hidden md:block">Notifications</span>
             </Link>
           </li>
