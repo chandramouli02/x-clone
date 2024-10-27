@@ -103,13 +103,9 @@ const Post = ({ post }) => {
       toast.success("Comment Added");
       
       queryClient.setQueryData(['posts'], (oldData) => {
-        return oldData.map(p => {
-          if(p._id === post._id) {
-            return {...p, comments: updatedComments}
-          }
-          return p
-        })
-      });
+        const newComment = updatedComments[updatedComments.length - 1];
+        oldData[0].comments.push(newComment);
+      })
       setComment("");
     },
     onError: (error) => {

@@ -82,12 +82,12 @@ export const commentOnPost = async (req, res) => {
       return res.status(400).json({ Error: "Post not found" });
     }
 
-    const comment = { user: userId, text };
+    const comment = { user: req.user, text};
+    //we are sending the user datails for getting user details in cache..
     post.comments.push(comment);
     await post.save();
 
     const updatedComments = post.comments
-
     res.status(200).json(updatedComments);
   } catch (error) {
     console.log("Error in commentOnPost controller", error.message);
