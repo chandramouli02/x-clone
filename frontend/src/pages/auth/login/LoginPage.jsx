@@ -5,6 +5,7 @@ import XSvg from "../../../components/svgs/X";
 
 import { MdOutlineMail } from "react-icons/md";
 import { MdPassword } from "react-icons/md";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
@@ -13,6 +14,8 @@ const LoginPage = () => {
     username: "",
     password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const queryClient = useQueryClient();
 
@@ -80,13 +83,16 @@ const LoginPage = () => {
           <label className="input input-bordered rounded flex items-center gap-2">
             <MdPassword />
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               className="grow"
               placeholder="Password"
               name="password"
               onChange={handleInputChange}
               value={formData.password}
             />
+            {showPassword ? <FaEye onClick={() => {setShowPassword(!showPassword)}}/>
+            : <FaEyeSlash onClick={() => {setShowPassword(!showPassword)}}/>
+          }
           </label>
           <button className="btn rounded-full btn-primary text-white">
             {isPending ? "Loading.." : "Login"}

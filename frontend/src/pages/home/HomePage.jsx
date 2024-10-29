@@ -8,7 +8,7 @@ const HomePage = () => {
 
 	return (
 		<>
-			<div className='flex-[4_4_0] mr-auto border-r border-gray-700 min-h-screen'>
+			<div className='mt-20 md:mt-0 flex-[4_4_0] mr-auto border-r border-gray-700 min-h-screen'>
 				{/* Header */}
 				<div className='flex w-full border-b border-gray-700'>
 					<div

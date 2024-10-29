@@ -45,12 +45,12 @@ const Sidebar = () => {
   const {data: notifications} = useQuery({queryKey: ["notifications"]})//to get the notifications length
 
   return (
-    <div className="md:flex-[2_2_0] w-18 max-w-52">
-      <div className="sticky top-0 left-0 h-screen flex flex-col border-r border-gray-700 w-20 md:w-full">
+    <div className="fixed z-10 top-0 md:sticky md:z-0 md:block md:flex-[2_2_0] md:max-w-52">
+      <div className="bg-opacity-85 md:bg-opacity-0  bg-black h-20 w-screen md:bg-none fixed md:sticky top-0 left-0 md:h-screen flex md:flex-col border-r border-gray-700 md:w-full">
         <Link to="/" className="flex justify-center md:justify-start">
-          <XSvg className="px-2 w-12 h-12 rounded-full fill-white hover:bg-stone-900" />
+          <XSvg className="mt-4 md:mt-0 px-2 w-12 h-12 rounded-full fill-white hover:bg-stone-900" />
         </Link>
-        <ul className="flex flex-col gap-3 mt-4">
+        <ul className="flex w-full justify-around items-center md:justify-start md:items-start md:flex-col gap-3 md:mt-4">
           <li className="flex justify-center md:justify-start">
             <Link
               to="/"
@@ -88,7 +88,7 @@ const Sidebar = () => {
         {authUser && (
           <Link
             to={`/profile/${authUser.username}`}
-            className="mt-auto mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full"
+            className="mt-5 md:mt-auto md:mb-10 flex gap-2 items-start transition-all duration-300 hover:bg-[#181818] py-2 px-4 rounded-full"
           >
             <div className="avatar hidden md:inline-flex">
               <div className="w-8 rounded-full">
